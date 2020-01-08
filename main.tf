@@ -10,7 +10,7 @@ resource "azurerm_virtual_network" "vnet" {
   resource_group_name = azurerm_resource_group.myresourcegroup.name
 }
 
-tags = {
+tags {
   environment = "production"
 }
 

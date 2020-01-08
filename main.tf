@@ -10,10 +10,6 @@ resource "azurerm_virtual_network" "vnet" {
   resource_group_name = azurerm_resource_group.myresourcegroup.name
 }
 
-tags {
-  environment = "production"
-}
-
 resource "azurerm_subnet" "subnet" {
   name                 = "${var.prefix}-subnet"
   virtual_network_name = azurerm_virtual_network.vnet.name
@@ -93,6 +89,10 @@ resource "azurerm_virtual_machine" "catapp" {
 
   network_interface_ids         = [azurerm_network_interface.catapp-nic.id]
   delete_os_disk_on_termination = "true"
+
+  tags = {
+    environment = "production"
+  }
 
   storage_image_reference {
     publisher = var.image_publisher
